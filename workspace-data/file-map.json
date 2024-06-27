@@ -1,0 +1,46 @@
+{
+  "version": "6.0",
+  "nxVersion": "19.3.2",
+  "deps": {
+    "@nx/angular": "19.3.2",
+    "@angular-devkit/core": "~18.0.0",
+    "@nx/workspace": "19.3.2",
+    "nx": "19.3.2",
+    "typescript": "~5.4.2"
+  },
+  "pathMappings": {},
+  "nxJsonPlugins": [],
+  "fileMap": {
+    "projectFileMap": {},
+    "nonProjectFiles": [
+      {
+        "file": ".editorconfig",
+        "hash": "5443105041930014821"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "17107242987988535020"
+      },
+      {
+        "file": ".vscode/extensions.json",
+        "hash": "3833545590435012078"
+      },
+      {
+        "file": "README.md",
+        "hash": "6523678540305053780"
+      },
+      {
+        "file": "nx.json",
+        "hash": "7984885312398650396"
+      },
+      {
+        "file": "package-lock.json",
+        "hash": "17037447937446048316"
+      },
+      {
+        "file": "package.json",
+        "hash": "11524856804539605543"
+      }
+    ]
+  }
+}

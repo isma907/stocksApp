@@ -1,0 +1,63 @@
+{
+  "name": "stocksBackend",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "stocksBackend/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "platform": "node",
+        "outputPath": "dist/stocksBackend",
+        "format": ["cjs"],
+        "bundle": false,
+        "main": "stocksBackend/src/main.ts",
+        "tsConfig": "stocksBackend/tsconfig.app.json",
+        "assets": ["stocksBackend/src/assets"],
+        "generatePackageJson": true,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "stocksBackend:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "stocksBackend:build:development"
+        },
+        "production": {
+          "buildTarget": "stocksBackend:build:production"
+        }
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "stocksBackend/jest.config.ts"
+      }
+    }
+  }
+}
