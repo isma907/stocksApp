@@ -5,7 +5,14 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class StocksService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
+
+
+  getDolarCCL() {
+    return this.http.get(
+      `http://localhost:3000/dolar/getCCL`
+    );
+  }
 
   getStock(symbol: string, market: string) {
     return this.http.get(

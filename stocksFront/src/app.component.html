@@ -1,0 +1,93 @@
+<div class="container">
+
+  <h3>
+    Dolar CCL: <span *ngIf="!editCCL">{{dolarCCL}}</span>
+    <input type="number" [(ngModel)]="dolarCCL" *ngIf="editCCL" style="width: 140px;">
+    <button class="btn btn-sm" (click)="editCCL = !editCCL"><i class="fa fa-pencil"></i></button>
+  </h3>
+
+  <form [formGroup]="form">
+    <table formArrayName="stocks" class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Simbolo</th>
+          <th>Mercado</th>
+          <th>Qty</th>
+          <th>ValorActual</th>
+          <th>Precio Compra</th>
+          <th>%</th>
+          <th>Total</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let stock of stocks.controls; let i = index" [formGroupName]="i" [draggable]="true"
+          (dragstart)="onDragStart($event, i)" (drop)="onDrop($event, i)" (dragover)="onDragOver($event)">
+          <td>
+            <i class="fa-solid fa-bars"></i>
+          </td>
+
+          <td>
+            <input formControlName="symbol" class="form-control" />
+          </td>
+
+          <td>
+            <select name="" id="" formControlName="market" class="form-control">
+              <option value="bcba">BCBA</option>
+              <option value="">NASDAQ</option>
+            </select>
+          </td>
+
+          <td>
+            <input formControlName="qty" type="number" class="form-control text-end" />
+          </td>
+
+          <td>
+            <fieldset disabled>
+              <input type="number" formControlName="stockValue" class="form-control text-end" />
+            </fieldset>
+          </td>
+
+          <td>
+            <input type="number" formControlName="precioCompra" class="form-control text-end" />
+          </td>
+
+          <td class="text-end">
+            <p [ngClass]="{
+            'text-success':stock.getRawValue().difference > 0,
+            'text-danger':stock.getRawValue().difference < 0 }">
+              {{calcDifference$(i)| async | json}}
+            </p>
+          </td>
+
+          <td class="text-end">
+            {{ this.getStockTotal(stock) | number : '1.2-2' }}
+          </td>
+
+          <td class="text-end">
+            {{this.getTotalRetiro(stock) | number : '1.2-2'}}
+          </td>
+          <td>
+            <button class="btn btn-sm btn-danger" (click)="removeRow(i)">x</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+
+  <button (click)="addNewRow()" class="btn btn-primary mx-2">Agregar Acción</button>
+  <button class="btn btn-success" (click)="saveLocal()"><i class="fa-regular fa-floppy-disk"></i></button>
+
+  <hr>
+
+  Valor Cartera BCBA = {{getTotalByMarket$('bcba') | async | number : '1.2-2'}}
+  <br>
+  Valor BCBA en Dolares {{getBCBADolares$()| async | number : '1.2-2'}}
+  <br>
+  Valor Cartera NASDAQ = {{getTotalByMarket$('') | async | number : '1.2-2'}}
+
+</div>
+
+<router-outlet></router-outlet>

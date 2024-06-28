@@ -1,9 +1,9 @@
 /* eslint-disable */
 export default {
-  displayName: 'Acciones',
-  preset: '../../jest.preset.js',
+  displayName: 'stocksFront',
+  preset: '../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../coverage/apps/Acciones',
+  coverageDirectory: '../coverage/stocksFront',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',
