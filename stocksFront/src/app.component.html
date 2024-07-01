@@ -1,93 +1,125 @@
 <div class="container">
+  <form [formGroup]="walletForm">
+    <div formArrayName="wallets">
+      <div
+        class="card shadow border-0"
+        *ngFor="let wallet of wallets.controls; let i = index"
+        [formGroupName]="i"
+        style="margin-bottom: 30px"
+      >
+        <div class="card-body">
+          <div class="form-floating mb-3">
+            <input
+              formControlName="name"
+              class="form-control"
+              placeholder="name@example.com"
+            />
 
-  <h3>
-    Dolar CCL: <span *ngIf="!editCCL">{{dolarCCL}}</span>
-    <input type="number" [(ngModel)]="dolarCCL" *ngIf="editCCL" style="width: 140px;">
-    <button class="btn btn-sm" (click)="editCCL = !editCCL"><i class="fa fa-pencil"></i></button>
-  </h3>
+            <label for="floatingInput">Wallet</label>
+          </div>
 
-  <form [formGroup]="form">
-    <table formArrayName="stocks" class="table">
-      <thead>
-        <tr>
-          <th></th>
-          <th>Simbolo</th>
-          <th>Mercado</th>
-          <th>Qty</th>
-          <th>ValorActual</th>
-          <th>Precio Compra</th>
-          <th>%</th>
-          <th>Total</th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let stock of stocks.controls; let i = index" [formGroupName]="i" [draggable]="true"
-          (dragstart)="onDragStart($event, i)" (drop)="onDrop($event, i)" (dragover)="onDragOver($event)">
-          <td>
-            <i class="fa-solid fa-bars"></i>
-          </td>
+          <table formArrayName="inversiones" class="table table-striped">
+            <thead>
+              <th></th>
+              <th>Simbolo</th>
+              <th>Mercado</th>
+              <th>Qty</th>
+              <th>Precio</th>
+              <th>Precio Compra</th>
+              <th>Valor Total</th>
+              <th>%</th>
+            </thead>
+            <tr
+              *ngFor="
+                let investment of getInvestments(wallet).controls;
+                let j = index
+              "
+              [formGroupName]="j"
+              draggable="true"
+              (dragstart)="onDragStart($event, i, j)"
+              (drop)="onDrop($event, i, j)"
+              (dragover)="allowDrop($event)"
+            >
+              <td>
+                <i class="fa-solid fa-bars"></i>
+              </td>
+              <td>
+                <input class="form-control" formControlName="symbol" />
+              </td>
+              <td>
+                <select class="form-control" formControlName="market">
+                  <option value="">NASDAQ</option>
+                  <option value="bcba">BCBA</option>
+                </select>
+              </td>
+              <td>
+                <input
+                  class="form-control text-end"
+                  formControlName="qty"
+                  type="number"
+                />
+              </td>
+              <td>
+                <fieldset [disabled]="true">
+                  <input
+                    class="form-control text-end"
+                    formControlName="stockValue"
+                    type="number"
+                  />
+                </fieldset>
+              </td>
+              <td>
+                <input
+                  class="form-control text-end"
+                  formControlName="precioCompra"
+                  type="number"
+                />
+              </td>
 
-          <td>
-            <input formControlName="symbol" class="form-control" />
-          </td>
+              <td class="text-end">
+                {{ getTotalRow(investment) | number : '1.2-2' }}
+              </td>
 
-          <td>
-            <select name="" id="" formControlName="market" class="form-control">
-              <option value="bcba">BCBA</option>
-              <option value="">NASDAQ</option>
-            </select>
-          </td>
+              <td class="text-end">
+                <p
+                  [ngClass]="{
+                    'text-success': calcDifference(investment) > 0,
+                    'text-danger': calcDifference(investment) < 0
+                  }"
+                >
+                  {{ calcDifference(investment) }}
+                </p>
+              </td>
 
-          <td>
-            <input formControlName="qty" type="number" class="form-control text-end" />
-          </td>
+              <button
+                class="btn btn-sm btn-outline-danger"
+                type="button"
+                (click)="removeInvestment(i, j)"
+              >
+                <i class="fa-regular fa-trash-can text-danger"></i>
+              </button>
+            </tr>
+          </table>
+          <button class="btn btn-sm" type="button" (click)="addInvestment(i)">
+            Agregar Inversion
+          </button>
 
-          <td>
-            <fieldset disabled>
-              <input type="number" formControlName="stockValue" class="form-control text-end" />
-            </fieldset>
-          </td>
+          <button class="btn btn-sm" type="button" (click)="removeWallet(i)">
+            Eliminar Wallet
+          </button>
+        </div>
+      </div>
+      <button class="btn btn-primary" type="button" (click)="addWallet()">
+        Agregar Wallet
+      </button>
 
-          <td>
-            <input type="number" formControlName="precioCompra" class="form-control text-end" />
-          </td>
-
-          <td class="text-end">
-            <p [ngClass]="{
-            'text-success':stock.getRawValue().difference > 0,
-            'text-danger':stock.getRawValue().difference < 0 }">
-              {{calcDifference$(i)| async | json}}
-            </p>
-          </td>
-
-          <td class="text-end">
-            {{ this.getStockTotal(stock) | number : '1.2-2' }}
-          </td>
-
-          <td class="text-end">
-            {{this.getTotalRetiro(stock) | number : '1.2-2'}}
-          </td>
-          <td>
-            <button class="btn btn-sm btn-danger" (click)="removeRow(i)">x</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+      <button
+        class="btn btn-success"
+        style="margin-left: 5px"
+        (click)="saveWallets()"
+      >
+        <i class="fa fa-save"></i>
+      </button>
+    </div>
   </form>
-
-  <button (click)="addNewRow()" class="btn btn-primary mx-2">Agregar Acción</button>
-  <button class="btn btn-success" (click)="saveLocal()"><i class="fa-regular fa-floppy-disk"></i></button>
-
-  <hr>
-
-  Valor Cartera BCBA = {{getTotalByMarket$('bcba') | async | number : '1.2-2'}}
-  <br>
-  Valor BCBA en Dolares {{getBCBADolares$()| async | number : '1.2-2'}}
-  <br>
-  Valor Cartera NASDAQ = {{getTotalByMarket$('') | async | number : '1.2-2'}}
-
 </div>
-
-<router-outlet></router-outlet>
