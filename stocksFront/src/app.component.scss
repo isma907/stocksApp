@@ -1,3 +1,30 @@
 .table > :not(caption) > * > * {
   background: none;
 }
+
+$footHeight: 80px;
+.main-container {
+  height: calc(100vh - $footHeight);
+  overflow: auto;
+}
+.footActions {
+  display: flex;
+  height: $footHeight;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: end;
+  color: #fff;
+  width: 100%;
+  background: #ddd;
+  a {
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 15px;
+    min-width: 80px;
+  }
+}

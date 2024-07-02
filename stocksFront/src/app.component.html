@@ -1,125 +1,191 @@
-<div class="container">
-  <form [formGroup]="walletForm">
-    <div formArrayName="wallets">
-      <div
-        class="card shadow border-0"
-        *ngFor="let wallet of wallets.controls; let i = index"
-        [formGroupName]="i"
-        style="margin-bottom: 30px"
-      >
-        <div class="card-body">
-          <div class="form-floating mb-3">
-            <input
-              formControlName="name"
-              class="form-control"
-              placeholder="name@example.com"
-            />
-
-            <label for="floatingInput">Wallet</label>
-          </div>
-
-          <table formArrayName="inversiones" class="table table-striped">
-            <thead>
-              <th></th>
-              <th>Simbolo</th>
-              <th>Mercado</th>
-              <th>Qty</th>
-              <th>Precio</th>
-              <th>Precio Compra</th>
-              <th>Valor Total</th>
-              <th>%</th>
-            </thead>
-            <tr
-              *ngFor="
-                let investment of getInvestments(wallet).controls;
-                let j = index
-              "
-              [formGroupName]="j"
-              draggable="true"
-              (dragstart)="onDragStart($event, i, j)"
-              (drop)="onDrop($event, i, j)"
-              (dragover)="allowDrop($event)"
-            >
-              <td>
-                <i class="fa-solid fa-bars"></i>
-              </td>
-              <td>
-                <input class="form-control" formControlName="symbol" />
-              </td>
-              <td>
-                <select class="form-control" formControlName="market">
-                  <option value="">NASDAQ</option>
-                  <option value="bcba">BCBA</option>
-                </select>
-              </td>
-              <td>
+<div class="main-container container-fluid">
+  <div class="row">
+    <div class="col-9">
+      <form [formGroup]="walletForm">
+        <div formArrayName="wallets">
+          <div
+            class="card shadow border-0"
+            *ngFor="let wallet of wallets.controls; let i = index"
+            [formGroupName]="i"
+            style="margin-bottom: 30px"
+          >
+            <div class="card-body">
+              <div class="form-floating mb-3">
                 <input
-                  class="form-control text-end"
-                  formControlName="qty"
-                  type="number"
+                  formControlName="name"
+                  class="form-control"
+                  placeholder="name@example.com"
                 />
-              </td>
-              <td>
-                <fieldset [disabled]="true">
-                  <input
-                    class="form-control text-end"
-                    formControlName="stockValue"
-                    type="number"
-                  />
-                </fieldset>
-              </td>
-              <td>
-                <input
-                  class="form-control text-end"
-                  formControlName="precioCompra"
-                  type="number"
-                />
-              </td>
 
-              <td class="text-end">
-                {{ getTotalRow(investment) | number : '1.2-2' }}
-              </td>
+                <label for="floatingInput">Wallet</label>
+              </div>
 
-              <td class="text-end">
-                <p
-                  [ngClass]="{
-                    'text-success': calcDifference(investment) > 0,
-                    'text-danger': calcDifference(investment) < 0
-                  }"
+              <table formArrayName="inversiones" class="table table-striped">
+                <thead>
+                  <th></th>
+                  <th>Simbolo</th>
+                  <th>Mercado</th>
+                  <th>Qty</th>
+                  <th>Precio</th>
+                  <th>Precio Compra</th>
+                  <!-- <th>Fecha Compra</th> -->
+                  <th>Valor Total</th>
+                  <th>%</th>
+                </thead>
+                <tr
+                  *ngFor="
+                    let investment of getInvestments(wallet).controls;
+                    let j = index
+                  "
+                  [formGroupName]="j"
+                  draggable="true"
+                  (dragstart)="onDragStart($event, i, j)"
+                  (drop)="onDrop($event, i, j)"
+                  (dragover)="allowDrop($event)"
                 >
-                  {{ calcDifference(investment) }}
-                </p>
-              </td>
+                  <td>
+                    <i class="fa-solid fa-bars"></i>
+                  </td>
+                  <td style="width: 130px">
+                    <input class="form-control" formControlName="symbol" />
+                  </td>
+                  <td style="width: 130px">
+                    <select class="form-control" formControlName="market">
+                      <option value="">NASDAQ</option>
+                      <option value="bcba">BCBA</option>
+                    </select>
+                  </td>
+                  <td style="width: 130px">
+                    <input
+                      class="form-control text-end"
+                      formControlName="qty"
+                      type="number"
+                    />
+                  </td>
+                  <td style="width: 130px">
+                    <fieldset [disabled]="true">
+                      <input
+                        class="form-control text-end"
+                        formControlName="stockValue"
+                        type="number"
+                      />
+                    </fieldset>
+                  </td>
+                  <td style="width: 130px">
+                    <input
+                      class="form-control text-end"
+                      formControlName="precioCompra"
+                      type="number"
+                    />
+                  </td>
+
+                  <!-- <td style="width: 130px">
+                    <input
+                      class="form-control"
+                      placeholder="yyyy-mm-dd"
+                      name="dp"
+                      formControlName="fechaCompra"
+                      ngbDatepicker
+                      #d="ngbDatepicker"
+                      (click)="d.toggle()"
+                    />
+                  </td> -->
+
+                  <td class="text-end">
+                    {{ getTotalRow(investment) | number : '1.2-2' }}
+                  </td>
+
+                  <td class="text-end">
+                    <p
+                      [ngClass]="{
+                        'text-success': calcDifference(investment) > 0,
+                        'text-danger': calcDifference(investment) < 0
+                      }"
+                    >
+                      {{ calcDifference(investment) }}
+                    </p>
+                  </td>
+
+                  <button
+                    class="btn btn-sm btn-outline-danger"
+                    type="button"
+                    (click)="removeInvestment(i, j)"
+                  >
+                    <i class="fa-regular fa-trash-can text-danger"></i>
+                  </button>
+                </tr>
+              </table>
+
+              <div class="text-end">
+                Total BCBA:
+                {{ getTotalByMarket(wallet, 'bcba') | number : '1.2-2' }}
+                <br />
+                Total NASDAQ:
+                {{ getTotalByMarket(wallet, '') | number : '1.2-2' }}
+              </div>
+              <button
+                class="btn btn-sm"
+                type="button"
+                (click)="addInvestment(i)"
+              >
+                Agregar Inversion
+              </button>
 
               <button
-                class="btn btn-sm btn-outline-danger"
+                class="btn btn-sm text-danger"
                 type="button"
-                (click)="removeInvestment(i, j)"
+                (click)="deleteWallet(i)"
               >
-                <i class="fa-regular fa-trash-can text-danger"></i>
+                Eliminar Wallet
               </button>
-            </tr>
-          </table>
-          <button class="btn btn-sm" type="button" (click)="addInvestment(i)">
-            Agregar Inversion
-          </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col">
+      <div class="card shadow border-0">
+        <div class="card-body">
+          <div>
+            <h3>
+              <div class="input-group mb-3">
+                <label *ngIf="!editCCL" style="margin-right: 15px">
+                  Dolar CCL: {{ dolarCCL }}</label
+                >
+                <input
+                  class="form-control"
+                  type="number"
+                  *ngIf="editCCL"
+                  [(ngModel)]="dolarCCL"
+                />
+                <button
+                  class="input-group-text btn btn-info"
+                  (click)="editCCL = !editCCL"
+                >
+                  <i class="fa fa-pencil"></i>
+                </button>
+              </div>
+            </h3>
+          </div>
 
-          <button class="btn btn-sm" type="button" (click)="removeWallet(i)">
-            Eliminar Wallet
-          </button>
+          <p>
+            Total Carteras BCBA:
+            {{ getAllWalletsTotalByMarket(markets.BCBA) | number : '1.2-2' }}
+          </p>
+          <p>
+            Total Carteras NASDAQ:
+            {{ getAllWalletsTotalByMarket(markets.NASDAQ) | number : '1.2-2' }}
+          </p>
         </div>
       </div>
-      <button class="btn btn-primary" type="button" (click)="addWallet()">
-        Agregar Wallet
-      </button>
-
-      <button
-        class="btn btn-success"
-        style="margin-left: 5px"
-        (click)="saveWallets()"
-      >
-        <i class="fa fa-save"></i>
-      </button>
     </div>
-  </form>
+  </div>
+</div>
+
+<div class="footActions">
+  <a class="bg-primary" type="button" (click)="addWallet()"> Agregar Wallet </a>
+
+  <a class="bg-success" (click)="saveWallets()">
+    <i class="fa fa-save"></i>
+  </a>
 </div>

@@ -29,7 +29,7 @@
           "market": "bcba",
           "qty": 103,
           "stockValue": "7295.50",
-          "precioCompra": 6745
+          "precioCompra": 6650
         }
       ]
     },
@@ -55,7 +55,7 @@
           "market": "bcba",
           "qty": 151,
           "stockValue": "3951.90",
-          "precioCompra": 4564.25
+          "precioCompra": 4500
         }
       ]
     },

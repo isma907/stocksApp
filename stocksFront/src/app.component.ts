@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { StocksService } from './services/stocks.service';
-import { CommonModule, DecimalPipe } from '@angular/common';
+import { CommonModule, DecimalPipe, JsonPipe } from '@angular/common';
 import {
   FormsModule,
   ReactiveFormsModule,
@@ -12,25 +12,28 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { debounceTime } from 'rxjs';
-
-export interface StockData {
-  symbol: string;
-  market: string;
-  stockValue: number;
-  precioCompra?: number;
-  difference?: number;
-  qty?: number;
-  total?: string;
-}
-
-export interface Wallet {
-  name: string;
-  inversiones: StockData[];
-}
+import {
+  NgbAlertModule,
+  NgbDatepickerModule,
+  NgbActiveModal,
+  NgbModal,
+} from '@ng-bootstrap/ng-bootstrap';
+import { DeleteWalletModal } from './components/modals/delete-wallet';
+import { E_MARKETS } from './enum/markets';
+import { Wallet, WalletData } from './interfaces/wallet';
 
 @Component({
   standalone: true,
-  imports: [RouterModule, CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    RouterModule,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgbDatepickerModule,
+    NgbAlertModule,
+    JsonPipe,
+    DeleteWalletModal,
+  ],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -39,11 +42,12 @@ export interface Wallet {
 export class AppComponent implements OnInit {
   stockService = inject(StocksService);
   fb = inject(FormBuilder);
-  dolarCCL = 0;
-  editCCL = false;
+  modalService = inject(NgbModal);
+  markets = E_MARKETS;
 
   walletForm!: FormGroup;
-
+  dolarCCL = 0;
+  editCCL = false;
   ngOnInit() {
     this.stockService.getDolarCCL().subscribe((res) => {
       this.dolarCCL = res as number;
@@ -77,13 +81,14 @@ export class AppComponent implements OnInit {
     });
   }
 
-  createInvestment(data?: StockData): FormGroup {
+  createInvestment(data?: WalletData): FormGroup {
     const group = this.fb.group({
       symbol: data?.symbol ?? '',
       market: data?.market ?? '',
       qty: data?.qty ?? '',
       stockValue: data?.stockValue ?? null,
       precioCompra: data?.precioCompra ?? '',
+      // fechaCompra: data?.fechaCompra ?? null,
     });
 
     group
@@ -108,6 +113,13 @@ export class AppComponent implements OnInit {
         this.search(group);
       });
 
+    setInterval(() => {
+      const { symbol, market } = group.getRawValue();
+      if (symbol && market) {
+        this.search(group);
+      }
+    }, 5000);
+
     return group;
   }
 
@@ -115,11 +127,18 @@ export class AppComponent implements OnInit {
     this.wallets.push(this.createWallet(name ?? ''));
   }
 
-  removeWallet(walletIndex: number) {
-    this.wallets.removeAt(walletIndex);
+  deleteWallet(walletIndex: number) {
+    const modalRef = this.modalService.open(DeleteWalletModal, {
+      backdrop: true,
+    });
+    modalRef.componentInstance.wallet =
+      this.walletForm.getRawValue().wallets[walletIndex];
+    modalRef.componentInstance.confirmed.subscribe(() => {
+      this.wallets.removeAt(walletIndex);
+    });
   }
 
-  addInvestment(walletIndex: number, data?: StockData) {
+  addInvestment(walletIndex: number, data?: WalletData) {
     const inversiones = this.wallets
       .at(walletIndex)
       .get('inversiones') as FormArray;
@@ -159,6 +178,33 @@ export class AppComponent implements OnInit {
     return values.qty * values.stockValue;
   }
 
+  getTotalByMarket(group: AbstractControl, market?: string) {
+    const values = group.getRawValue();
+    const sumWithInitial = (values.inversiones as WalletData[]).reduce(
+      (accumulator, data) => {
+        const marketFilter = market;
+        if (data.qty && data.stockValue && data.market === market)
+          return accumulator + data.qty * data.stockValue;
+        return accumulator + 0;
+      },
+      0
+    );
+    return sumWithInitial;
+  }
+
+  getAllWalletsTotalByMarket(market: E_MARKETS) {
+    const values = this.walletForm.getRawValue();
+    const total = values.wallets.reduce((accumulator: number, wallet: any) => {
+      wallet.inversiones.forEach((data: WalletData) => {
+        if (data.qty && data.stockValue && data.market === market) {
+          accumulator += data.qty * data.stockValue;
+        }
+      });
+      return accumulator;
+    }, 0);
+
+    return total;
+  }
   calcDifference(group: AbstractControl) {
     const data = group.getRawValue();
     if (data.precioCompra) {
