@@ -5,7 +5,7 @@ export interface WalletData {
   market: E_MARKETS;
   stockValue: number;
   precioCompra?: number;
-  // fechaCompra?: string;
+  fechaCompra?: string;
   difference?: number;
   qty?: number;
   total?: string;

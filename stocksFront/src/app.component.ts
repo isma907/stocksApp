@@ -18,6 +18,11 @@ import {
   NgbActiveModal,
   NgbModal,
 } from '@ng-bootstrap/ng-bootstrap';
+
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+
 import { DeleteWalletModal } from './components/modals/delete-wallet';
 import { E_MARKETS } from './enum/markets';
 import { Wallet, WalletData } from './interfaces/wallet';
@@ -33,6 +38,9 @@ import { Wallet, WalletData } from './interfaces/wallet';
     NgbAlertModule,
     JsonPipe,
     DeleteWalletModal,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
   ],
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -88,7 +96,7 @@ export class AppComponent implements OnInit {
       qty: data?.qty ?? '',
       stockValue: data?.stockValue ?? null,
       precioCompra: data?.precioCompra ?? '',
-      // fechaCompra: data?.fechaCompra ?? null,
+      fechaCompra: data?.fechaCompra ?? null,
     });
 
     group

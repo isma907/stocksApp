@@ -2,6 +2,16 @@
   background: none;
 }
 
+.table > :not(caption) {
+  .form-control-sm,
+  .form-select-sm {
+    padding: 0.25rem 0.5rem;
+  }
+  .btn {
+    padding: initial;
+  }
+}
+
 $footHeight: 80px;
 .main-container {
   height: calc(100vh - $footHeight);
@@ -18,7 +28,7 @@ $footHeight: 80px;
   justify-content: end;
   color: #fff;
   width: 100%;
-  background: #ddd;
+  background: #1c1f22;
   a {
     color: #fff;
     display: flex;
