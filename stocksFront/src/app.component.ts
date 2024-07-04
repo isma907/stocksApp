@@ -25,7 +25,7 @@ import { MatInputModule } from '@angular/material/input';
 
 import { DeleteWalletModal } from './components/modals/delete-wallet';
 import { E_MARKETS } from './enum/markets';
-import { Wallet, WalletData } from './interfaces/wallet';
+import { InversionResume, Wallet, WalletData } from './interfaces/wallet';
 
 @Component({
   standalone: true,
@@ -181,6 +181,11 @@ export class AppComponent implements OnInit {
   }
   //
 
+  getGastoRow(group: AbstractControl) {
+    const values = group.getRawValue();
+    return values.qty * values.precioCompra;
+  }
+
   getTotalRow(group: AbstractControl) {
     const values = group.getRawValue();
     return values.qty * values.stockValue;
@@ -223,6 +228,25 @@ export class AppComponent implements OnInit {
       return value;
     }
     return 0;
+  }
+
+  totalPorAccion() {
+    const wallets = this.wallets.getRawValue() as Wallet[];
+    const data: InversionResume = {};
+
+    wallets.forEach((wallet) => {
+      wallet.inversiones.forEach((inversion) => {
+        const { symbol, qty, market, stockValue } = inversion;
+        const objKey = `${symbol}_${market}`;
+
+        if (data[objKey] === undefined) {
+          data[objKey] = 0;
+        }
+        if (qty && stockValue) data[objKey] += qty * stockValue;
+      });
+    });
+
+    return data;
   }
 
   //

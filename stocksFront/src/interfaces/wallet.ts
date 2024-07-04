@@ -15,3 +15,7 @@ export interface Wallet {
   name: string;
   inversiones: WalletData[];
 }
+
+export interface InversionResume {
+  [val: string]: number;
+}

@@ -29,7 +29,8 @@
                   <th>Qty</th>
                   <th>Precio</th>
                   <th>Precio Compra</th>
-                  <th class="text-end">Valor Total</th>
+                  <th class="text-end">Gasto Total</th>
+                  <th class="text-end">Valor Actual</th>
                   <th class="text-end">%</th>
                 </thead>
                 <tr
@@ -50,7 +51,7 @@
                   <td style="width: 130px">
                     <div>
                       <input
-                        class="form-control"
+                        class="form-control form-control-sm"
                         placeholder="fecha"
                         [matDatepicker]="picker"
                         formControlName="fechaCompra"
@@ -96,6 +97,10 @@
                       formControlName="precioCompra"
                       type="number"
                     />
+                  </td>
+
+                  <td class="text-end">
+                    {{ getGastoRow(investment) | number : '1.2-2' }}
                   </td>
 
                   <td class="text-end">
@@ -183,6 +188,22 @@
             Total Carteras NASDAQ:
             {{ getAllWalletsTotalByMarket(markets.NASDAQ) | number : '1.2-2' }}
           </p>
+
+          <div class="card">
+            <ul class="list-group list-group-flush">
+              <li
+                class="list-group-item"
+                *ngFor="let inv of totalPorAccion() | keyvalue"
+              >
+                <div class="d-flex justify-content-between">
+                  <span class="text-start">{{ inv.key.split("_")[0] }}:</span
+                  ><span class="text-end">
+                    {{ inv.value | number : '1.2-2' }}</span
+                  >
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>

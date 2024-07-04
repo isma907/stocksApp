@@ -4,32 +4,60 @@
       "name": "Galicia",
       "inversiones": [
         {
-          "symbol": "GOOGL",
+          "symbol": "AMZN",
           "market": "bcba",
-          "qty": 188,
-          "stockValue": "4460.50",
-          "precioCompra": 2908.5
+          "qty": 1289,
+          "stockValue": "1990.00",
+          "precioCompra": 466.55,
+          "fechaCompra": "2023-06-28T03:00:00.000Z"
         },
         {
           "symbol": "AMZN",
           "market": "bcba",
-          "qty": 1450,
-          "stockValue": "1938.00",
-          "precioCompra": 1263
+          "qty": 109,
+          "stockValue": "1990.00",
+          "precioCompra": 769.32,
+          "fechaCompra": "2023-10-27T03:00:00.000Z"
         },
         {
-          "symbol": "MELI",
+          "symbol": "AMZN",
           "market": "bcba",
-          "qty": 64,
-          "stockValue": "18744.50",
-          "precioCompra": 15782
+          "qty": 34,
+          "stockValue": "1990.00",
+          "precioCompra": 863.15,
+          "fechaCompra": "2023-11-28T03:00:00.000Z"
+        },
+        {
+          "symbol": "AMZN",
+          "market": "bcba",
+          "qty": 9,
+          "stockValue": "1990.00",
+          "precioCompra": 922.99,
+          "fechaCompra": "2023-12-04T03:00:00.000Z"
+        },
+        {
+          "symbol": "AMZN",
+          "market": "bcba",
+          "qty": 9,
+          "stockValue": "1990.00",
+          "precioCompra": 1014.2,
+          "fechaCompra": "2023-12-11T03:00:00.000Z"
+        },
+        {
+          "symbol": "GOOGL",
+          "market": "bcba",
+          "qty": 188,
+          "stockValue": "4563.00",
+          "precioCompra": 1061.2,
+          "fechaCompra": "2023-06-28T03:00:00.000Z"
         },
         {
           "symbol": "NVDA",
           "market": "bcba",
           "qty": 103,
-          "stockValue": "7295.50",
-          "precioCompra": 6650
+          "stockValue": "7384.00",
+          "precioCompra": 6744.94,
+          "fechaCompra": "2024-06-25T03:00:00.000Z"
         }
       ]
     },
@@ -37,25 +65,60 @@
       "name": "Cocos Capital",
       "inversiones": [
         {
+          "symbol": "MELI",
+          "market": "bcba",
+          "qty": 63,
+          "stockValue": "18800.00",
+          "precioCompra": 7706.08,
+          "fechaCompra": "2023-06-28T03:00:00.000Z"
+        },
+        {
           "symbol": "NVDA",
           "market": "bcba",
           "qty": 2,
-          "stockValue": "7295.50",
-          "precioCompra": 6806.58
+          "stockValue": "7384.00",
+          "precioCompra": 7326,
+          "fechaCompra": "2024-07-02T03:00:00.000Z"
+        },
+        {
+          "symbol": "NVDA",
+          "market": "bcba",
+          "qty": 2,
+          "stockValue": "7384.00",
+          "precioCompra": 6806.58,
+          "fechaCompra": "2024-05-26T03:00:00.000Z"
         },
         {
           "symbol": "AMZN",
           "market": "bcba",
           "qty": 5,
-          "stockValue": "1938.00",
-          "precioCompra": 1832.77
+          "stockValue": "1990.00",
+          "precioCompra": 1832.77,
+          "fechaCompra": "2024-06-28T03:00:00.000Z"
         },
         {
           "symbol": "GGAL",
           "market": "bcba",
           "qty": 151,
-          "stockValue": "3951.90",
-          "precioCompra": 4500
+          "stockValue": "4000.10",
+          "precioCompra": 4564.25,
+          "fechaCompra": "2024-06-13T03:00:00.000Z"
+        },
+        {
+          "symbol": "AMZN",
+          "market": "bcba",
+          "qty": 131,
+          "stockValue": "1990.00",
+          "precioCompra": 1910,
+          "fechaCompra": "2024-07-03T03:00:00.000Z"
+        },
+        {
+          "symbol": "GOOGL",
+          "market": "bcba",
+          "qty": 55,
+          "stockValue": "4563.00",
+          "precioCompra": 4490,
+          "fechaCompra": "2024-07-03T03:00:00.000Z"
         }
       ]
     },
@@ -66,8 +129,9 @@
           "symbol": "GOOGL",
           "market": "bcba",
           "qty": 5,
-          "stockValue": "4460.50",
-          "precioCompra": 4300
+          "stockValue": "4563.00",
+          "precioCompra": 4300,
+          "fechaCompra": "2024-06-28T03:00:00.000Z"
         }
       ]
     }
