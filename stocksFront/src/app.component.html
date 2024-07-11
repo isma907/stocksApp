@@ -3,19 +3,11 @@
     <div class="col-9">
       <form [formGroup]="walletForm">
         <div formArrayName="wallets">
-          <div
-            class="card shadow border-0"
-            *ngFor="let wallet of wallets.controls; let i = index"
-            [formGroupName]="i"
-            style="margin-bottom: 30px"
-          >
+          <div class="card shadow border-0" *ngFor="let wallet of wallets.controls; let i = index" [formGroupName]="i"
+            style="margin-bottom: 30px">
             <div class="card-body">
               <div class="form-floating mb-3">
-                <input
-                  formControlName="name"
-                  class="form-control"
-                  placeholder="name@example.com"
-                />
+                <input formControlName="name" class="form-control" placeholder="name@example.com" />
 
                 <label for="floatingInput">Wallet</label>
               </div>
@@ -33,70 +25,42 @@
                   <th class="text-end">Valor Actual</th>
                   <th class="text-end">%</th>
                 </thead>
-                <tr
-                  *ngFor="
+                <tbody>
+                <tr *ngFor="
                     let investment of getInvestments(wallet).controls;
                     let j = index
-                  "
-                  [formGroupName]="j"
-                  draggable="true"
-                  (dragstart)="onDragStart($event, i, j)"
-                  (drop)="onDrop($event, i, j)"
-                  (dragover)="allowDrop($event)"
-                >
-                  <td>
+                  " [formGroupName]="j" draggable="true" (dragstart)="onDragStart($event, i, j)"
+                  (drop)="onDrop($event, i, j)" (dragover)="allowDrop($event)">
+                  <td class="drag">
                     <i class="fa-solid fa-bars"></i>
                   </td>
 
                   <td style="width: 130px">
                     <div>
-                      <input
-                        class="form-control form-control-sm"
-                        placeholder="fecha"
-                        [matDatepicker]="picker"
-                        formControlName="fechaCompra"
-                        (click)="picker.open()"
-                      />
+                      <input class="form-control form-control-sm" placeholder="fecha" [matDatepicker]="picker"
+                        formControlName="fechaCompra" (click)="picker.open()" />
                       <mat-datepicker #picker></mat-datepicker>
                     </div>
                   </td>
                   <td style="width: 130px">
-                    <input
-                      class="form-control form-control-sm"
-                      formControlName="symbol"
-                    />
+                    <input class="form-control form-control-sm" formControlName="symbol" />
                   </td>
                   <td style="width: 130px">
-                    <select
-                      class="form-select form-select-sm"
-                      formControlName="market"
-                    >
+                    <select class="form-select form-select-sm" formControlName="market">
                       <option value="">NASDAQ</option>
                       <option value="bcba">BCBA</option>
                     </select>
                   </td>
                   <td style="width: 130px">
-                    <input
-                      class="form-control form-control-sm text-end"
-                      formControlName="qty"
-                      type="number"
-                    />
+                    <input class="form-control form-control-sm text-end" formControlName="qty" type="number" />
                   </td>
                   <td style="width: 130px">
                     <fieldset [disabled]="true">
-                      <input
-                        class="form-control form-control-sm text-end"
-                        formControlName="stockValue"
-                        type="number"
-                      />
+                      <input class="form-control form-control-sm text-end" formControlName="stockValue" type="number" />
                     </fieldset>
                   </td>
                   <td style="width: 130px">
-                    <input
-                      class="form-control form-control-sm text-end"
-                      formControlName="precioCompra"
-                      type="number"
-                    />
+                    <input class="form-control form-control-sm text-end" formControlName="precioCompra" type="number" />
                   </td>
 
                   <td class="text-end">
@@ -108,24 +72,24 @@
                   </td>
 
                   <td class="text-end">
-                    <p
-                      [ngClass]="{
+                    <span [ngClass]="{
                         'text-success': calcDifference(investment) > 0,
                         'text-danger': calcDifference(investment) < 0
-                      }"
-                    >
+                      }">
                       {{ calcDifference(investment) }}
-                    </p>
+                    </span>
                   </td>
 
-                  <button
-                    class="btn btn-sm btn-outline-danger"
-                    type="button"
-                    (click)="removeInvestment(i, j)"
-                  >
-                    <i class="fa-regular fa-trash-can text-danger"></i>
-                  </button>
+
+                  <td>
+                    <div>
+                      <button class="btn btn-sm btn-outline-danger" type="button" (click)="removeInvestment(i, j)">
+                        <i class="fa-regular fa-trash-can text-danger"></i>
+                      </button>
+                    </div>
+                  </td>
                 </tr>
+              </tbody>
               </table>
 
               <div class="text-end">
@@ -135,19 +99,11 @@
                 Total NASDAQ:
                 {{ getTotalByMarket(wallet, '') | number : '1.2-2' }}
               </div>
-              <button
-                class="btn btn-sm"
-                type="button"
-                (click)="addInvestment(i)"
-              >
+              <button class="btn btn-sm" type="button" (click)="addInvestment(i)">
                 Agregar Inversion
               </button>
 
-              <button
-                class="btn btn-sm text-danger"
-                type="button"
-                (click)="deleteWallet(i)"
-              >
+              <button class="btn btn-sm text-danger" type="button" (click)="deleteWallet(i)">
                 Eliminar Wallet
               </button>
             </div>
@@ -162,18 +118,9 @@
             <h3>
               <div class="input-group mb-3">
                 <label *ngIf="!editCCL" style="margin-right: 15px">
-                  Dolar CCL: {{ dolarCCL }}</label
-                >
-                <input
-                  class="form-control form-control-sm"
-                  type="number"
-                  *ngIf="editCCL"
-                  [(ngModel)]="dolarCCL"
-                />
-                <button
-                  class="input-group-text btn btn-info"
-                  (click)="editCCL = !editCCL"
-                >
+                  Dolar CCL: {{ dolarCCL }}</label>
+                <input class="form-control form-control-sm" type="number" *ngIf="editCCL" [(ngModel)]="dolarCCL" />
+                <button class="input-group-text btn btn-info" (click)="editCCL = !editCCL">
                   <i class="fa fa-pencil"></i>
                 </button>
               </div>
@@ -190,19 +137,17 @@
           </p>
 
           <div class="card">
-            <ul class="list-group list-group-flush">
-              <li
-                class="list-group-item"
-                *ngFor="let inv of totalPorAccion() | keyvalue"
-              >
-                <div class="d-flex justify-content-between">
-                  <span class="text-start">{{ inv.key.split("_")[0] }}:</span
-                  ><span class="text-end">
-                    {{ inv.value | number : '1.2-2' }}</span
-                  >
-                </div>
-              </li>
-            </ul>
+            <div class="card-body">
+              <table class="table">
+                <tbody>
+                  <tr *ngFor="let inv of totalPorAccion() | keyvalue">
+                    <td>{{ inv.key.split('_')[0] }}</td>
+                    <td class="text-end">{{ inv.value['invertido'] | number : '1.2-2' }}</td>
+                    <td class="text-end">{{ inv.value['total'] | number : '1.2-2' }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

@@ -62,7 +62,7 @@ export class AppComponent implements OnInit {
     });
 
     const oldDataToNewWallets: any = JSON.parse(
-      localStorage.getItem('stocksApp') ?? ''
+      localStorage.getItem('stocksApp') ?? '{}'
     );
 
     this.walletForm = this.fb.group({
@@ -126,7 +126,7 @@ export class AppComponent implements OnInit {
       if (symbol && market) {
         this.search(group);
       }
-    }, 5000);
+    }, 10000);
 
     return group;
   }
@@ -170,6 +170,7 @@ export class AppComponent implements OnInit {
       JSON.stringify({ walletIndex, investmentIndex })
     );
   }
+
 
   search(abstract: AbstractControl) {
     const { symbol, market } = abstract.getRawValue();
@@ -236,13 +237,19 @@ export class AppComponent implements OnInit {
 
     wallets.forEach((wallet) => {
       wallet.inversiones.forEach((inversion) => {
-        const { symbol, qty, market, stockValue } = inversion;
+        const { symbol, qty, market, stockValue, precioCompra } = inversion;
         const objKey = `${symbol}_${market}`;
 
         if (data[objKey] === undefined) {
-          data[objKey] = 0;
+          data[objKey] = {
+            invertido: 0,
+            total: 0
+          }
         }
-        if (qty && stockValue) data[objKey] += qty * stockValue;
+        if (qty && stockValue) {
+          data[objKey]['invertido'] += qty * (precioCompra ?? 0);
+          data[objKey]['total'] += qty * stockValue;
+        }
       });
     });
 

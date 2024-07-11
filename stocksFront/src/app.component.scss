@@ -1,14 +1,22 @@
 .table > :not(caption) > * > * {
   background: none;
+  margin: 0;
 }
 
-.table > :not(caption) {
+.table {
+  td {
+    &.drag {
+      text-align: center;
+      cursor: move;
+    }
+    vertical-align: middle;
+  }
+  div {
+    padding: 0 !important;
+  }
   .form-control-sm,
   .form-select-sm {
     padding: 0.25rem 0.5rem;
-  }
-  .btn {
-    padding: initial;
   }
 }
 
