@@ -171,7 +171,6 @@ export class AppComponent implements OnInit {
     );
   }
 
-
   search(abstract: AbstractControl) {
     const { symbol, market } = abstract.getRawValue();
     if (symbol) {
@@ -243,8 +242,8 @@ export class AppComponent implements OnInit {
         if (data[objKey] === undefined) {
           data[objKey] = {
             invertido: 0,
-            total: 0
-          }
+            total: 0,
+          };
         }
         if (qty && stockValue) {
           data[objKey]['invertido'] += qty * (precioCompra ?? 0);
@@ -254,6 +253,15 @@ export class AppComponent implements OnInit {
     });
 
     return data;
+  }
+
+  get getTotalDolares() {
+    const totalCarteraBCBA = this.getAllWalletsTotalByMarket(this.markets.BCBA);
+    const ccl = this.dolarCCL;
+    if (totalCarteraBCBA && this.dolarCCL) {
+      return totalCarteraBCBA / ccl;
+    }
+    return;
   }
 
   //
