@@ -268,6 +268,17 @@ export class AppComponent implements OnInit {
     return diferenciaTotal;
   }
 
+  get getTotalDolares() {
+    const totalCarterasBCBA = this.getAllWalletsTotalByMarket(
+      this.markets.BCBA
+    );
+    const ccl = this.dolarCCL;
+    if (totalCarterasBCBA && ccl) {
+      return totalCarterasBCBA / ccl;
+    }
+    return;
+  }
+
   //
   onDrop(event: DragEvent, targetWalletIndex: number, targetIndex: number) {
     event.preventDefault();
