@@ -255,13 +255,17 @@ export class AppComponent implements OnInit {
     return data;
   }
 
-  get getTotalDolares() {
-    const totalCarteraBCBA = this.getAllWalletsTotalByMarket(this.markets.BCBA);
-    const ccl = this.dolarCCL;
-    if (totalCarteraBCBA && this.dolarCCL) {
-      return totalCarteraBCBA / ccl;
-    }
-    return;
+  perdidaGananciaEnDinero(group: AbstractControl): number {
+    const data = group.getRawValue();
+    const diferencia = data.stockValue - data.precioCompra;
+    const porcentajeDiferencia = (diferencia / data.precioCompra) * 100;
+    const porcentaje = parseFloat(porcentajeDiferencia.toFixed(2));
+    const totalInvertido = data.precioCompra * data.qty;
+    const valorFinal = totalInvertido * (1 + porcentaje / 100);
+
+    const diferenciaTotal = valorFinal - totalInvertido;
+
+    return diferenciaTotal;
   }
 
   //
