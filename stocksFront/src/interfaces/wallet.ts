@@ -18,6 +18,7 @@ export interface Wallet {
 
 export interface InversionResume {
   [val: string]: {
+    qty:number,
     total: number,
     invertido: number
   };

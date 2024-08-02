@@ -52,6 +52,7 @@ export class AppComponent implements OnInit {
   fb = inject(FormBuilder);
   modalService = inject(NgbModal);
   markets = E_MARKETS;
+  stockValueAuto: boolean = true;
 
   walletForm!: FormGroup;
   dolarCCL = 0;
@@ -175,7 +176,7 @@ export class AppComponent implements OnInit {
     const { symbol, market } = abstract.getRawValue();
     if (symbol) {
       this.stockService.getStock(symbol, market).subscribe((res: any) => {
-        abstract.patchValue({ stockValue: res });
+        if (this.stockValueAuto) abstract.patchValue({ stockValue: res });
       });
     }
   }
@@ -241,11 +242,13 @@ export class AppComponent implements OnInit {
 
         if (data[objKey] === undefined) {
           data[objKey] = {
+            qty: 0,
             invertido: 0,
             total: 0,
           };
         }
         if (qty && stockValue) {
+          data[objKey]['qty'] += qty;
           data[objKey]['invertido'] += qty * (precioCompra ?? 0);
           data[objKey]['total'] += qty * stockValue;
         }

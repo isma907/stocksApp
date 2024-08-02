@@ -1,5 +1,31 @@
 <div class="main-container container-fluid">
   <div class="row">
+    <div class="btn-group" role="group" aria-label="Precio Accion Manual">
+      <input
+        type="radio"
+        class="btn-check"
+        name="btnradio"
+        id="btnradio1"
+        autocomplete="off"
+        [value]="true"
+        [(ngModel)]="stockValueAuto"
+        [checked]="stockValueAuto"
+      />
+      <label class="btn btn-outline-primary" for="btnradio1">Auto</label>
+
+      <input
+        type="radio"
+        class="btn-check"
+        name="btnradio"
+        id="btnradio2"
+        autocomplete="off"
+        [value]="false"
+        [(ngModel)]="stockValueAuto"
+        [checked]="!stockValueAuto"
+      />
+      <label class="btn btn-outline-primary" for="btnradio2">Manual</label>
+    </div>
+
     <div class="col-9">
       <form [formGroup]="walletForm">
         <div formArrayName="wallets">
@@ -84,7 +110,7 @@
                       />
                     </td>
                     <td style="width: 130px">
-                      <fieldset [disabled]="true">
+                      <fieldset [disabled]="stockValueAuto">
                         <input
                           class="form-control form-control-sm text-end"
                           formControlName="stockValue"
@@ -209,6 +235,9 @@
                 <tbody>
                   <tr *ngFor="let inv of totalPorAccion() | keyvalue">
                     <td>{{ inv.key.split('_')[0] }}</td>
+                    <td>
+                      {{ inv.value['qty'] }}
+                    </td>
                     <td class="text-end">
                       {{ inv.value['invertido'] | number : '1.2-2' }}
                     </td>
