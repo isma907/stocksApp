@@ -1,7 +1,7 @@
 {
   "wallets": [
     {
-      "name": "Galicia",
+      "name": "AMAZON",
       "inversiones": [
         {
           "symbol": "AMZN",
@@ -49,38 +49,6 @@
           "fechaCompra": "2023-12-11T03:00:00.000Z"
         },
         {
-          "symbol": "NVDA",
-          "market": "bcba",
-          "qty": 103,
-          "stockValue": "5810.00",
-          "precioCompra": 6744.94,
-          "dolarFecha": 1312.66,
-          "fechaCompra": "2024-06-25T03:00:00.000Z"
-        }
-      ]
-    },
-    {
-      "name": "Cocos Capital",
-      "inversiones": [
-        {
-          "symbol": "NVDA",
-          "market": "bcba",
-          "qty": 2,
-          "stockValue": "5810.00",
-          "precioCompra": 7326,
-          "dolarFecha": 1428.27,
-          "fechaCompra": "2024-07-02T03:00:00.000Z"
-        },
-        {
-          "symbol": "NVDA",
-          "market": "bcba",
-          "qty": 2,
-          "stockValue": "5810.00",
-          "precioCompra": 6806.58,
-          "dolarFecha": 1244.56,
-          "fechaCompra": "2024-05-26T03:00:00.000Z"
-        },
-        {
           "symbol": "AMZN",
           "market": "bcba",
           "qty": 5,
@@ -106,6 +74,38 @@
           "precioCompra": 1996,
           "dolarFecha": 1398.43,
           "fechaCompra": "2024-07-04T03:00:00.000Z"
+        }
+      ]
+    },
+    {
+      "name": "NVIDIA",
+      "inversiones": [
+        {
+          "symbol": "NVDA",
+          "market": "bcba",
+          "qty": 2,
+          "stockValue": "5810.00",
+          "precioCompra": 6806.58,
+          "dolarFecha": 1244.56,
+          "fechaCompra": "2024-05-26T03:00:00.000Z"
+        },
+        {
+          "symbol": "NVDA",
+          "market": "bcba",
+          "qty": 103,
+          "stockValue": "5810.00",
+          "precioCompra": 6744.94,
+          "dolarFecha": 1312.66,
+          "fechaCompra": "2024-06-25T03:00:00.000Z"
+        },
+        {
+          "symbol": "NVDA",
+          "market": "bcba",
+          "qty": 2,
+          "stockValue": "5810.00",
+          "precioCompra": 7326,
+          "dolarFecha": 1428.27,
+          "fechaCompra": "2024-07-02T03:00:00.000Z"
         },
         {
           "symbol": "NVDA",
