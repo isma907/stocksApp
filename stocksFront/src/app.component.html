@@ -55,6 +55,8 @@
                   <th>Qty</th>
                   <th>Precio</th>
                   <th>Precio Compra</th>
+                  <th>Precio Dolar Fecha</th>
+                  <th>Dolares a la Fecha</th>
                   <th class="text-end">Gasto Total</th>
                   <th class="text-end">Valor Actual</th>
                   <th class="text-end">%</th>
@@ -124,6 +126,18 @@
                         formControlName="precioCompra"
                         type="number"
                       />
+                    </td>
+
+                    <td style="width: 130px">
+                      <input
+                        class="form-control form-control-sm text-end"
+                        formControlName="dolarFecha"
+                        type="number"
+                      />
+                    </td>
+
+                    <td>
+                      {{ totalDolarFecha(investment) | number : '1.2-2' }}
                     </td>
 
                     <td class="text-end">
@@ -227,7 +241,9 @@
             {{ getAllWalletsTotalByMarket(markets.NASDAQ) | number : '1.2-2' }}
           </p>
 
-          <p>U$D {{ getTotalDolares | number : '1.2-2' }}</p>
+          <p>U$D INVERTIDO: {{ TotalDolaresFechaCompra | number : '1.2-2' }}</p>
+          <p>U$D ACTUAL:{{ getTotalDolares | number : '1.2-2' }}</p>
+
 
           <div class="card">
             <div class="card-body">

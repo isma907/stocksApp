@@ -5,6 +5,7 @@ export interface WalletData {
   market: E_MARKETS;
   stockValue: number;
   precioCompra?: number;
+  dolarFecha?: number;
   fechaCompra?: string;
   difference?: number;
   qty?: number;
@@ -18,8 +19,8 @@ export interface Wallet {
 
 export interface InversionResume {
   [val: string]: {
-    qty:number,
-    total: number,
-    invertido: number
+    qty: number;
+    total: number;
+    invertido: number;
   };
 }

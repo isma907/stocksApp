@@ -4,32 +4,58 @@
       "name": "Galicia",
       "inversiones": [
         {
-          "symbol": "GOOGL",
+          "symbol": "AMZN",
           "market": "bcba",
-          "qty": 188,
-          "stockValue": "4460.50",
-          "precioCompra": 2908.5
+          "qty": 1289,
+          "stockValue": "1475.00",
+          "precioCompra": 466.55,
+          "dolarFecha": 496.29,
+          "fechaCompra": "2023-06-28T03:00:00.000Z"
         },
         {
           "symbol": "AMZN",
           "market": "bcba",
-          "qty": 1450,
-          "stockValue": "1938.00",
-          "precioCompra": 1263
+          "qty": 109,
+          "stockValue": "1475.00",
+          "precioCompra": 769.32,
+          "dolarFecha": 859.73,
+          "fechaCompra": "2023-10-27T03:00:00.000Z"
         },
         {
-          "symbol": "MELI",
+          "symbol": "AMZN",
           "market": "bcba",
-          "qty": 64,
-          "stockValue": "18744.50",
-          "precioCompra": 15782
+          "qty": 34,
+          "stockValue": "1475.00",
+          "precioCompra": 863.15,
+          "dolarFecha": 848.9,
+          "fechaCompra": "2023-11-28T03:00:00.000Z"
+        },
+        {
+          "symbol": "AMZN",
+          "market": "bcba",
+          "qty": 9,
+          "stockValue": "1475.00",
+          "precioCompra": 922.99,
+          "dolarFecha": 890.78,
+          "fechaCompra": "2023-12-04T03:00:00.000Z"
+        },
+        {
+          "symbol": "AMZN",
+          "market": "bcba",
+          "qty": 9,
+          "stockValue": "1475.00",
+          "precioCompra": 1014.2,
+          "dolarFecha": 1000.55,
+          "fechaCompra": "2023-12-11T03:00:00.000Z"
         },
         {
           "symbol": "NVDA",
           "market": "bcba",
           "qty": 103,
-          "stockValue": "7295.50",
-          "precioCompra": 6745
+          "stockValue": "5810.00",
+          "precioCompra": 6744.94,
+          "dolarFecha": 1312.66,
+          "fechaCompra": "2024-06-25T03:00:00.000Z"
         }
       ]
     },
@@ -40,34 +66,64 @@
           "symbol": "NVDA",
           "market": "bcba",
           "qty": 2,
-          "stockValue": "7295.50",
-          "precioCompra": 6806.58
+          "stockValue": "5810.00",
+          "precioCompra": 7326,
+          "dolarFecha": 1428.27,
+          "fechaCompra": "2024-07-02T03:00:00.000Z"
+        },
+        {
+          "symbol": "NVDA",
+          "market": "bcba",
+          "qty": 2,
+          "stockValue": "5810.00",
+          "precioCompra": 6806.58,
+          "dolarFecha": 1244.56,
+          "fechaCompra": "2024-05-26T03:00:00.000Z"
         },
         {
           "symbol": "AMZN",
           "market": "bcba",
           "qty": 5,
-          "stockValue": "1938.00",
-          "precioCompra": 1832.77
+          "stockValue": "1475.00",
+          "precioCompra": 1832.77,
+          "dolarFecha": 1350.18,
+          "fechaCompra": "2024-06-28T03:00:00.000Z"
         },
         {
-          "symbol": "GGAL",
+          "symbol": "AMZN",
           "market": "bcba",
-          "qty": 151,
-          "stockValue": "3951.90",
-          "precioCompra": 4564.25
-        }
-      ]
-    },
-    {
-      "name": "BullMarket",
-      "inversiones": [
+          "qty": 131,
+          "stockValue": "1475.00",
+          "precioCompra": 1910,
+          "dolarFecha": 1394.29,
+          "fechaCompra": "2024-07-03T03:00:00.000Z"
+        },
         {
-          "symbol": "GOOGL",
+          "symbol": "AMZN",
           "market": "bcba",
-          "qty": 5,
-          "stockValue": "4460.50",
-          "precioCompra": 4300
+          "qty": 302,
+          "stockValue": "1475.00",
+          "precioCompra": 1996,
+          "dolarFecha": 1398.43,
+          "fechaCompra": "2024-07-04T03:00:00.000Z"
+        },
+        {
+          "symbol": "NVDA",
+          "market": "bcba",
+          "qty": 171,
+          "stockValue": "5810.00",
+          "precioCompra": 7470,
+          "dolarFecha": 1414.42,
+          "fechaCompra": "2024-07-11T03:00:00.000Z"
+        },
+        {
+          "symbol": "MSFT",
+          "market": "bcba",
+          "qty": 77,
+          "stockValue": "17375.00",
+          "precioCompra": 18275,
+          "dolarFecha": 1302.24,
+          "fechaCompra": "2024-08-01T03:00:00.000Z"
         }
       ]
     }

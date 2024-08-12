@@ -97,6 +97,7 @@ export class AppComponent implements OnInit {
       qty: data?.qty ?? '',
       stockValue: data?.stockValue ?? null,
       precioCompra: data?.precioCompra ?? '',
+      dolarFecha: data?.dolarFecha ?? null,
       fechaCompra: data?.fechaCompra ?? null,
     });
 
@@ -280,6 +281,45 @@ export class AppComponent implements OnInit {
       return totalCarterasBCBA / ccl;
     }
     return;
+  }
+
+  get TotalDolaresFechaCompra() {
+    const values = this.walletForm.getRawValue();
+    const total = values.wallets.reduce((accumulator: number, wallet: any) => {
+      wallet.inversiones.forEach((data: WalletData) => {
+        if (
+          data.qty &&
+          data.precioCompra &&
+          data.market === E_MARKETS.BCBA &&
+          data.dolarFecha
+        ) {
+          accumulator += (data.qty * data.precioCompra) / data.dolarFecha;
+        }
+      });
+      return accumulator;
+    }, 0);
+
+    return total;
+  }
+
+  totalDolarFecha(group: AbstractControl | WalletData): number {
+    let qty;
+    let precioCompra;
+    let dolarFecha;
+
+    if (group instanceof AbstractControl) {
+      const formVal = group.getRawValue();
+      qty = formVal.qty;
+      precioCompra = formVal.precioCompra;
+      dolarFecha = formVal.dolarFecha;
+    } else {
+      qty = group.qty;
+      precioCompra = group.precioCompra;
+      dolarFecha = group.dolarFecha;
+    }
+
+    const total = precioCompra * qty;
+    return total / dolarFecha;
   }
 
   //
